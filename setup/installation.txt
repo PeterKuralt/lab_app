@@ -1,0 +1,69 @@
+#Instructions for installing Temperature and Humidity Monitoring system on RaspberryPI
+#Based on Peter Dalmaris project
+
+Installing basic prerequisites
+---------------------------------------------------------------------------------------------
+
+Install vim
+
+apt-get install -y vim
+
+Install git
+
+apt-get install git -y core
+
+
+
+Create project folder
+---------------------------------------------------------------------------------------------
+
+cd var
+
+mkdir /www
+
+cd www
+
+
+
+Download and run basic install script
+---------------------------------------------------------------------------------------------
+
+
+git clone https://github.com/PeterKuralt/lab_app/setup
+
+. setup_v1.sh
+
+
+
+Creating SQLite tables
+---------------------------------------------------------------------------------------------
+
+sqlite3 lab_app.db
+
+CREATE TABLE temperatures (rDatetime datetime, sensorID text, temp numeric);
+CREATE TABLE humidities (rDatetime datetime, sensorID text, temp numeric);
+
+.exit
+
+
+
+Setting crontabjob to insert data into database every 20 minutes
+---------------------------------------------------------------------------------------------
+
+crontab -e
+
+insert this value into file:
+
+*/20 * * * * /var/www/lab_app/venv/bin/python /var/www/lab_app/env_log.py >/dev/null 2>&1
+
+
+REBOOT
+----------------------------------------------------------------------------------------------
+RUN IFCONFIG TO FIND THE IP OF THE HOST - TYPE IT IN BROWSER 
+
+IP/trenutno_stanje
+
+
+ENYOJ
+-----------------------------------------------------------------------------------------------
+
