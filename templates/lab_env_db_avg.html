@@ -1,0 +1,165 @@
+<html>
+  <meta charset="utf-8">
+  <title>Lab Conditions by RPi</title>
+  <meta http-equiv="refresh" content="60">
+  <meta name="description" content="Lab conditions - RPi">
+  <meta name="author" content="Peter Kuralt">
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/skeleton.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/static/images/favicon.png">
+</head>
+  <body>
+  <div class="u-full-width" style="background-color: #E0FBFC; height:50px;">
+  <h5 style="padding-top:5px;"><strong>NAMEOFYOURROOM:</strong>   {{date}}<h5/>
+  </div>
+      <div class="container">
+	<div class=row">
+	<nav>
+	  <a class="button button-primary" href="/trenutno_stanje">Trenutno</a>
+          <a class="button button-primary" href="/lab_env_db" style="margin-top:35px;">Histogram</a>
+	</nav>	
+       <div class="row">
+        <form id="datetime_range" action="/lab_env_db_avg" method="GET"> 
+            <div class="three columns">
+              <label for="from">Od datuma</label>
+              <input class="u-full-width" id="datetimepicker1" type="text" value="{{from_date}}" name="from">
+            </div>        
+            <div class="three columns">
+              <label for="to">Do datuma</label>           
+              <input class="u-full-width" id="datetimepicker2" type="text" value="{{to_date}}" name="to">
+            </div>           
+            <div class="two columns">           
+              <input class="button" type="submit" value="Potrdi" style="position:relative; top: 28px" id="submit_button" />
+            </div>        
+        </form> 
+      </div>
+	 <div class="row">
+      <div class="twelve columns">
+        	<form id="range_select" action = "/lab_env_db_avg" method="GET" style="margin-top:25px;">        
+          		<div class="one column">
+            			<input type="radio" name="range_h" value="90" id="radio_3" /><label for="radio_3">3 mesece</label>
+          		</div>
+          		<div class="one column">
+            			<input type="radio" name="range_h" value="180" id="radio_6" /><label for="radio_6">6 mesecev</label>
+          		</div>
+          		<div class="one column">
+            			<input type="radio" name="range_h" value="270" id="radio_12" /><label for="radio_9">9 mesecev</label>
+         		</div>
+          		<div class="one column">
+            			<input type="radio" name="range_h" value="365" id="radio_24" /><label for="radio_12">12 memesecev</label>
+          		</div>
+        	</form>          
+      		</div>
+    	</div>
+     <div class="row">	
+	<div class="six columns" style="margin-top:5%">		 
+		   </br>
+	    		<h4>Povprečna temperatura: <strong> {{"{0:0.1f}".format(temp) }}°C </strong></h4>
+	    		<h4>Najvišja temperatura: <strong> {{"{0:0.1f}".format(tmax) }}°C </strong></h4>
+        		<h4>Najnižja temperatura: <strong> {{"{0:0.1f}".format(tmin) }}°C </strong></h4>
+
+	</div>
+	<div class="six columns" style="margin-top:5%">
+		</br>
+       			<h4>Povprečna vlažnost: <strong> {{"{0:0.1f}".format(hum) }}% </strong></h4>
+                        <h4>Najvišja vlažnost: <strong> {{"{0:0.1f}".format(hmax) }}% </strong></h4>
+                        <h4>Najnižja vlažnost: <strong> {{"{0:0.1f}".format(hmin) }}% </strong></h4>
+	</div>
+    </div>
+  <div class="row">
+     <div class="six columns">
+     	<div id="chart_temp" style="height: 450px;"></div>
+     </div>
+     <div class="six columns">
+	<div id="chart_hum" style="height: 450px;"></div>
+     </div>
+  </div>
+  </body>
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    
+<!-- Datetimepicker files start -->
+  <link rel="stylesheet" type="text/css" href="/static/css/jquery.datetimepicker.css"/ >
+  <script src="/static/javascript/jquery.datetimepicker.js"></script>
+  <script>
+    jQuery('#datetimepicker1').datetimepicker(
+      {
+        format:'Y-m-d H:i',
+        defaultDate:'{{from_date}}'
+      });
+    jQuery('#datetimepicker2').datetimepicker({
+        format:'Y-m-d H:i',
+        defaultDate:'{{to_date}}'
+      });
+      jQuery("#range_select input[type=radio]").click(function(){ 
+        jQuery("#range_select").submit();
+      });
+  </script>
+
+<!-- Datetimepicker files end -->
+
+<!-- Google chart code files start -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+
+      function drawVisualization() {
+        var data = google.visualization.arrayToDataTable([
+         ['Izbrano obdobje', 'MIN', 'AVG', 'MAX'],
+         [ {{today}}, {{tmin}},      {{temp}},       {{tmax}},             ],
+         ]);
+
+	var data2 = google.visualization.arrayToDataTable([
+	 ['Izbrano obdobje', 'MIN', 'AVG', 'MAX'],
+         [ {{today}}, {{hmin}},      {{hum}},       {{hmax}},             ],
+         ]);
+
+
+    var options = {
+        title : 'Povprečna, najvišja in najnižja temperatura',
+        vAxis: {title: 'Stopinje'},
+        hAxis: {title: 'Izbrano obdobje: {{gdate}} dni.'},
+        seriesType: 'bars',
+        colors: ['#E0FBFC', '#F84343', '#1EAEDB'],
+        legend:'bottom'
+    };
+
+   var options2 = {
+        title : 'Povprečna, najvišja in najnižja vlažnost',
+        vAxis: {title: 'Procenti'},
+        hAxis: {title: 'Izbrano obdobje: {{gdate}} dni.'},
+        seriesType: 'bars',
+        colors: ['#E0FBFC', '#F84343', '#1EAEDB'],
+        legend:'bottom'
+    };
+
+
+
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_temp'));
+    chart.draw(data, options);
+
+    var chart2 = new google.visualization.ComboChart(document.getElementById('chart_hum'));
+    chart2.draw(data2, options2);
+
+  }
+    </script>
+
+
+<!-- Google chart code end -->
+
+</head> 
+</html>
+
+

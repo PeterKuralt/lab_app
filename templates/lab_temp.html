@@ -1,0 +1,91 @@
+<html>  
+  <meta charset="utf-8">
+  <title>Lab Conditions by RPi</title>
+  <meta http-equiv="refresh" content="60">
+  <meta name="description" content="Lab conditions - RPi">
+  <meta name="author" content="Peter Kuralt">
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/skeleton.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/static/images/favicon.png">
+</head>
+  <body>
+   <div class="u-full-width" style="background-color: #E0FBFC; height:50px;">
+   <h5 style="padding-top:5px;"><strong>NAMEOFYOURROOM:</strong>  {{date}}<h5/>  
+   </div>
+    <div class="container">
+      <div class ="row">
+     <nav>
+          <a class="button button-primary" href="/lab_env_db">Histogram</a>
+          <a class="button button-primary" href="/lab_env_db_avg" style="margin-top:35px;">Povprečje</a>
+     </nav>
+     </div>
+      <div class="row">
+        <div class="six columns" style="margin-top: 5%">
+            <h3>Temperatura: {{"{0:0.1f}".format(temp) }}°C</h3>
+        </div>
+	<div class="six columns" style="margin-top: 5%">
+	    <h3>Vlaga: {{"{0:0.1f}".format(hum)}}%</h3>
+	</div>   
+      </div>
+     <div class="row">
+      	<div class="twelve columns">
+	   <div id="chart_div" style="width: 400px; height: 120px; padding-left:63px; padding-top:25px;"></div>
+	<div class="six columns">
+	</div>
+     </div>
+     </div>           
+  </body>
+
+<!-- Google chart code files start -->
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+	  
+	  ['Temp',{{"{0:0.1f}".format(temp) }}],
+	  ['Hum',{{"{0:0.1f}".format(hum) }}]
+        ]);
+
+
+        var options = {
+          width: 600, height: 320,
+          minorTicks: 2,
+	  max: 65
+        };
+
+	var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+        
+	chart.draw(data, options);
+
+	 setInterval(function() {
+          data.setValue();
+          chart.draw(data, options);
+        }, 13000);
+        setInterval(function() {
+          data.setValue();
+          chart.draw(data, options);
+        }, 5000);
+        setInterval(function() {
+          data.setValue();
+          chart.draw(data, options);
+        }, 26000);
+      }
+
+
+    </script>
+
+</html> 
