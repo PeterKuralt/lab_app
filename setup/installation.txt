@@ -35,6 +35,14 @@ git clone https://github.com/PeterKuralt/lab_app/setup
 
 
 
+
+Connecting the sensor
+---------------------------------------------------------------------------------------------
+
+application asumes that you are using GPIO04 pin for data reading
+
+
+
 Creating SQLite tables
 ---------------------------------------------------------------------------------------------
 
