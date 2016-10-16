@@ -1,8 +1,18 @@
 #Instructions for installing Temperature and Humidity Monitoring system on RaspberryPI
-#Based on Peter Dalmaris project
+#Based on Peter Dalmaris's project
 
-Installing basic prerequisites
+Installing basic prerequisites - assuming you have a flavor of minibian installed
 ---------------------------------------------------------------------------------------------
+apt-get install -y raspi-config
+
+run raspi-config:
+
+1. Expand Filesystem
+2. Enable SSH
+3. Set proper timezone for your country / region 
+
+apt-get update
+apt-get upgrade
 
 Install vim
 
@@ -10,8 +20,7 @@ apt-get install -y vim
 
 Install git
 
-apt-get install git -y core
-
+apt-get install -y git-core
 
 
 Create project folder
@@ -29,7 +38,11 @@ Download and run basic install script
 ---------------------------------------------------------------------------------------------
 
 
-git clone https://github.com/PeterKuralt/lab_app/setup
+git clone https://github.com/PeterKuralt/lab_app
+
+cd lab_app/setup
+cp setup_v1.sh /var/www/
+cd /var/www
 
 . setup_v1.sh
 
@@ -39,7 +52,7 @@ git clone https://github.com/PeterKuralt/lab_app/setup
 Connecting the sensor
 ---------------------------------------------------------------------------------------------
 
-application asumes that you are using GPIO04 pin for data reading
+application asumes that you are using AM2302 T&H sensor and GPIO04 pin for data reading
 
 
 
@@ -55,7 +68,9 @@ CREATE TABLE humidities (rDatetime datetime, sensorID text, temp numeric);
 
 
 
-Setting crontabjob to insert data into database every 20 minutes
+Setting crontabjob to insert sensor reading data into database every 20 minutes
+#If you would like to change this interval adjust the value according to crontab syntax: 
+#http://www.crontab-generator.org/
 ---------------------------------------------------------------------------------------------
 
 crontab -e
@@ -65,12 +80,16 @@ insert this value into file:
 */20 * * * * /var/www/lab_app/venv/bin/python /var/www/lab_app/env_log.py >/dev/null 2>&1
 
 
-REBOOT
+READY TO GO
 ----------------------------------------------------------------------------------------------
-RUN IFCONFIG TO FIND THE IP OF THE HOST - TYPE IT IN BROWSER 
+RUN IFCONFIG TO FIND THE IP OF THE HOST 
+TYPE ADDRESS INTO BROWSER 
 
-IP/trenutno_stanje
+YOUR RASPY IP/trenutno_stanje
 
+YOU CAN NOW REMOTELY CONNECT TO YOUR RASPBERRY PI WITH MOBAXTERM, PUTTY OR ANY OTHER SSH TOOL
+
+REBOOT
 
 ENYOJ
 -----------------------------------------------------------------------------------------------
