@@ -12,18 +12,10 @@ echo "Installing upgrades"
 
 apt-get install -y upgrade
 
-echo "Install git-core"
-
-apt-get install -y git-core
-
 echo "Setting the git user"
 
 git config --global user.name "terapevt"
 git config --global user.email "terapevt@gmail.com"
-
-echo "Cloning git repository"
-
-git clone https://github.com/PeterKuralt/lab_app
 
 cd lab_app
 
