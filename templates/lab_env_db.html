@@ -28,22 +28,22 @@
     <div class="container">
       <div class ="row">
      <nav>
-          <a class="button button-primary" href="/trenutno_stanje">Trenutno</a>
-	  <a class="button button-primary" href="/lab_env_db_avg">Povprečje</a>
-	  <a class="button button-primary" href="" id="plotly" style="margin-top:35px;">Plotly</a>
+          <a class="button button-primary" href="/trenutno_stanje">NOW</a>
+	  <a class="button button-primary" href="/lab_env_db_avg">AVERAGE</a>
+	  <a class="button button-primary" href="" id="plotly" style="margin-top:35px;">PLOTLY</a>
      </nav> 
      </div>
 	<div class="row">
 	      <form id="datetime_range" action="/lab_env_db" method="GET"> 
 	        <!-- <div class="row">          -->
 	          <div class="three columns">
-	            <label for="from"><strong>Od datuma</strong></label>
+	            <label for="from"><strong>From date</strong></label>
 	            <input class="u-full-width" id="datetimepicker1" type="text" value="{{from_date}}" name="from">
 	          </div>
 	        <!-- </div> -->
 	        <!-- <div class="row"> -->
 	          <div class="three columns">
-	            <label for="to"><strong>Do datuma</strong></label>           
+	            <label for="to"><strong>To date</strong></label>           
 	            <input class="u-full-width" id="datetimepicker2" type="text" value="{{to_date}}" name="to">
 	          </div>   
 	        <!-- </div>          -->
@@ -79,12 +79,12 @@
 	</div>
       <div class="row">
         <div class="one-third column" style="margin-top: 5%">
-          <strong>Prikaz vseh zapisov</strong>
-          <h2>Temperatura</h2>
+          <strong>All records</strong>
+          <h2>Temperature</h2>
             <table class="u-full-width">
               <thead>
                 <tr>
-                  <th>Datum</th>
+                  <th>Date</th>
                   <th>&deg;C</th>
                 </tr>
               </thead>
@@ -97,11 +97,11 @@
                 {% endfor %}
               </tbody>
             </table>
-            <h2>Vlaga</h2>
+            <h2>Humidity</h2>
             <table class="u-full-width">
               <thead>
                 <tr>
-                  <th>Datum</th>
+                  <th>Date</th>
                   <th>%</th>
                 </tr>
               </thead>
