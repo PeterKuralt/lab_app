@@ -2,8 +2,8 @@
 
 Temperature-and-Humidity-Monitoring-System 
 
-Based on Peter Dalmaris project. Some subtle upgrades were made:
+Based on Peter Dalmaris's project. Some subtle upgrades were made:
 
-1) automation installation script added
-2) average, lowest, highest values with graph added
-3) room specification with datetime
+1) added automation installation script 
+2) added average, lowest, highest values with graphs 
+3) added room specification with server datetime
