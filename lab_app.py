@@ -7,7 +7,7 @@ app.debug = False # Make this true if you want to turn on debug mode
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "Only true worriors know how to set up servers. Congratulations Shiba san!"
 
 
 #Branje trenutnih podatkov senzorja
@@ -18,7 +18,7 @@ def trenutno_stanje():
 	from datetime import datetime
 	from dateutil import tz
 	today = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-	humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 04)
+	humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 17)
 	if humidity is not None and temperature is not None:
 		return render_template("lab_temp.html",temp=temperature,hum=humidity, date=today)
 	else:
