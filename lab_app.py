@@ -11,8 +11,8 @@ def hello():
 
 
 #Branje trenutnih podatkov senzorja
-@app.route("/trenutno_stanje")
-def trenutno_stanje():
+@app.route("/now")
+def now():
 	import sys
 	import Adafruit_DHT
 	from datetime import datetime
