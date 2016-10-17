@@ -18,7 +18,7 @@ def trenutno_stanje():
 	from datetime import datetime
 	from dateutil import tz
 	today = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-	humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 17)
+	humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 04)
 	if humidity is not None and temperature is not None:
 		return render_template("lab_temp.html",temp=temperature,hum=humidity, date=today)
 	else:
