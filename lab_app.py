@@ -10,7 +10,7 @@ def hello():
     return "Only true worriors know how to set up servers. Congratulations Shiba san!"
 
 
-#Branje trenutnih podatkov senzorja
+#Sensor data reading method
 @app.route("/now")
 def now():
 	import sys
@@ -26,7 +26,7 @@ def now():
         
 
 
-#Povprecna, maksimalna in minimalna temperatura za obdobje, ki ga izbere uporabnik
+#Maximal, minimal and average temperature for the time period defined by user
 @app.route("/lab_env_db_avg", methods=['GET'])
 def lab_env_db_avg():
 	today = get_time()
