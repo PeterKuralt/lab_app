@@ -11,3 +11,5 @@ Based on Peter Dalmaris's project. Some subtle upgrades were made:
 3) added room specification with server datetime
 
 Just follow the instructions found in /setup/instructions.txt
+
+You can contact me on email: p.kuralt@gmail.com
