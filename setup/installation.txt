@@ -68,13 +68,13 @@ CREATE TABLE humidities (rDatetime datetime, sensorID text, temp numeric);
 
 Inserting some dummy values (Without values average method will return internal server error)
 
-INSTERT INTO TEMPERATURES VALUES (datetime('now'), "1", 25)
-INSTERT INTO TEMPERATURES VALUES (datetime('now'), "1", 26)
-INSTERT INTO TEMPERATURES VALUES (datetime('now'), "1", 24)
+INSERT INTO TEMPERATURES VALUES (datetime('now'), "1", 25)
+INSERT INTO TEMPERATURES VALUES (datetime('now'), "1", 26)
+INSERT INTO TEMPERATURES VALUES (datetime('now'), "1", 24)
 
-INSTERT INTO HUMIDITIES VALUES (datetime('now'), "1", 55)
-INSTERT INTO HUMIDITIES VALUES (datetime('now'), "1", 56)
-INSTERT INTO HUMIDITIES VALUES (datetime('now'), "1", 55)
+INSERT INTO HUMIDITIES VALUES (datetime('now'), "1", 55)
+INSERT INTO HUMIDITIES VALUES (datetime('now'), "1", 56)
+INSERT INTO HUMIDITIES VALUES (datetime('now'), "1", 55)
 
 ----------------------------------------------------------------------------------
 
