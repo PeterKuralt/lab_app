@@ -28,7 +28,7 @@ Create project folder
 
 cd var
 
-mkdir /www
+mkdir www
 
 cd www
 
