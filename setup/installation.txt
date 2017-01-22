@@ -64,17 +64,17 @@ sqlite3 lab_app.db
 CREATE TABLE temperatures (rDatetime datetime, sensorID text, temp numeric);
 CREATE TABLE humidities (rDatetime datetime, sensorID text, temp numeric);
 
-.exit
-
 Inserting some dummy values (Without values average method will return internal server error)
 
-INSERT INTO TEMPERATURES VALUES (datetime('now'), "1", 25)
-INSERT INTO TEMPERATURES VALUES (datetime('now'), "1", 26)
-INSERT INTO TEMPERATURES VALUES (datetime('now'), "1", 24)
+INSERT INTO TEMPERATURES VALUES (datetime('now'), "1", 25);
+INSERT INTO TEMPERATURES VALUES (datetime('now'), "1", 26);
+INSERT INTO TEMPERATURES VALUES (datetime('now'), "1", 24);
 
-INSERT INTO HUMIDITIES VALUES (datetime('now'), "1", 55)
-INSERT INTO HUMIDITIES VALUES (datetime('now'), "1", 56)
-INSERT INTO HUMIDITIES VALUES (datetime('now'), "1", 55)
+INSERT INTO HUMIDITIES VALUES (datetime('now'), "1", 55);
+INSERT INTO HUMIDITIES VALUES (datetime('now'), "1", 56);
+INSERT INTO HUMIDITIES VALUES (datetime('now'), "1", 55);
+
+.exit
 
 ----------------------------------------------------------------------------------
 
