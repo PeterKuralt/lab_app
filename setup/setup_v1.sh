@@ -14,8 +14,8 @@ apt-get install -y upgrade
 
 echo "Setting the git user"
 
-git config --global user.name ""
-git config --global user.email ""
+git config --global user.name " "
+git config --global user.email " "
 
 cd lab_app
 
