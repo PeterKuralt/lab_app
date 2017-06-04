@@ -97,7 +97,7 @@ clear
 
 echo "Installing upstart and copying the conf file to proper folder"
 
-apt-get install -y upstart
+echo Yes, do as I say! | apt-get install upstart
 
 mv /var/www/lab_app/uwsgi.conf /etc/init/
 
