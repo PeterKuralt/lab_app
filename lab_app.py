@@ -9,6 +9,22 @@ app.debug = False # Make this true if you want to turn on debug mode
 def hello():
     return "Only true worriors know how to set up servers. Congratulations Shiba san!"
 
+#method for outputing temperature, humidity readings in json
+@app.route("/json")
+def json():
+        import sys
+        import Adafruit_DHT
+        from datetime import datetime
+        from dateutil import tz
+        from flask import jsonify
+        name_of_room = "Name of your room"
+        today = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 04)
+        if humidity is not None and temperature is not None:
+                return jsonify(a_room=name_of_room, humidity=humidity, temperature=temperature, datetime=today)
+        else:
+                return render_template("no_sensor.html")
+
 
 #Sensor data reading method
 @app.route("/now")
