@@ -7,7 +7,7 @@ app.debug = False # Make this true if you want to turn on debug mode
 
 @app.route("/")
 def hello():
-    return "Only true worriors know how to set up servers. Congratulations Shiba san!"
+    return "Only true warriors know how to set up servers. Congratulations Shiba san!"
 
 #method for outputing temperature, humidity readings in json
 @app.route("/json")
